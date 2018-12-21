@@ -41,6 +41,10 @@ final class READMEPreviewViewController: InputBarViewController {
             }
         }
     }
+    
+    override func inputBar(_ inputBar: InputBarAccessoryView, didPressBackwardWith text: String) {
+        print("delete backward with text: ", text)
+    }
 
     private func setStateSending() {
         inputBar.inputTextView.text = ""

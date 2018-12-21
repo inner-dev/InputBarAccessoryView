@@ -365,6 +365,10 @@ open class InputBarAccessoryView: UIView {
         setupConstraints(to: window)
     }
     
+    public func didDeleteBackward() {
+        delegate?.inputBar(self, didPressBackwardWith: inputTextView.text)
+    }
+    
     // MARK: - Setup
     
     /// Sets up the default properties
@@ -392,6 +396,7 @@ open class InputBarAccessoryView: UIView {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(InputBarAccessoryView.inputTextViewDidEndEditing),
                                                name: UITextView.textDidEndEditingNotification, object: inputTextView)
+        
     }
     
     /// Adds a UISwipeGestureRecognizer for each direction to the InputTextView

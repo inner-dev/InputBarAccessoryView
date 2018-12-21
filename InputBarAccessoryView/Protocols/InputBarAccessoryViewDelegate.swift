@@ -60,6 +60,13 @@ public protocol InputBarAccessoryViewDelegate: AnyObject {
     ///   - inputBar: The InputBarAccessoryView
     ///   - gesture: The gesture that was recognized
     func inputBar(_ inputBar: InputBarAccessoryView, didSwipeTextViewWith gesture: UISwipeGestureRecognizer)
+    
+    /// Called when a delete backward was recognized on the InputBarAccessoryView's InputTextView
+    ///
+    /// - Parameters:
+    ///   - inputBar: The InputBarAccessoryView
+    ///   - text: The current text in the InputBarAccessoryView's InputTextView
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressBackwardWith text: String)
 }
 
 public extension InputBarAccessoryViewDelegate {
@@ -71,4 +78,6 @@ public extension InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {}
     
     func inputBar(_ inputBar: InputBarAccessoryView, didSwipeTextViewWith gesture: UISwipeGestureRecognizer) {}
+    
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressBackwardWith text: String) {}
 }

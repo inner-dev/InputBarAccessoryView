@@ -397,5 +397,9 @@ open class InputTextView: UITextView {
         layoutManager.invalidateLayout(forCharacterRange: range, actualCharacterRange: nil)
     }
     
+    override open func deleteBackward() {
+        super.deleteBackward()
+        inputBarAccessoryView?.didDeleteBackward()
+    }
 }
 
