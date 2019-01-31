@@ -168,16 +168,15 @@ open class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 notification.isForCurrentApp else { return }
             self?.animateAlongside(notification) {
                 self?.constraints?.bottom?.constant = -keyboardHeight
-                self?.inputAccessoryView?.superview?.layoutIfNeeded()
+                //self?.inputAccessoryView?.superview?.layoutIfNeeded()
             }
         }
         callbacks[.willHide] = { [weak self] (notification) in
             guard notification.isForCurrentApp else { return }
-            self?.constraints?.bottom?.constant = 0
-//            self?.animateAlongside(notification) { [weak self] in
-//                self?.constraints?.bottom?.constant = 0
-//                self?.inputAccessoryView?.superview?.layoutIfNeeded()
-//            }
+            self?.animateAlongside(notification) { [weak self] in
+                self?.constraints?.bottom?.constant = 0
+                self?.inputAccessoryView?.superview?.layoutIfNeeded()
+            }
         }
         return self
     }
