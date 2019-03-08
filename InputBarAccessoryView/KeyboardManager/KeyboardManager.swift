@@ -27,7 +27,7 @@
 
 import UIKit
 
-/// An object that observes keyboard notifications such that event callbacks can be set for each notification
+/// An object that observes keyboard notifanimateAlongsideications such that event callbacks can be set for each notification
 open class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
     
     /// A callback that passes a `KeyboardNotification` as an input
@@ -40,18 +40,18 @@ open class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
     open weak var inputAccessoryView: UIView?
     
     /// A flag that indicates if a portion of the keyboard is visible on the screen
-    private(set) public var isKeyboardHidden: Bool = true
+    public var isKeyboardHidden: Bool = true
     
     // MARK: - Properties [Private]
     
     /// The `NSLayoutConstraintSet` that holds the `inputAccessoryView` to the bottom if its superview
-    private var constraints: NSLayoutConstraintSet?
+    open var constraints: NSLayoutConstraintSet?
     
     /// A weak reference to a `UIScrollView` that has been attached for interactive keyboard dismissal
     private weak var scrollView: UIScrollView?
     
     /// The `EventCallback` actions for each `KeyboardEvent`. Default value is EMPTY
-    private var callbacks: [KeyboardEvent: EventCallback] = [:]
+    public var callbacks: [KeyboardEvent: EventCallback] = [:]
     
     /// The pan gesture that handles dragging on the `scrollView`
     private var panGesture: UIPanGestureRecognizer?
@@ -78,6 +78,10 @@ open class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getConstraints() -> NSLayoutConstraintSet? {
+        return constraints
     }
     
     // MARK: - De-Initialization
@@ -258,7 +262,7 @@ open class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
     
     // MARK: - Helper Methods
     
-    private func animateAlongside(_ notification: KeyboardNotification, animations: @escaping ()->Void) {
+    open func animateAlongside(_ notification: KeyboardNotification, animations: @escaping ()->Void) {
         UIView.animate(withDuration: notification.timeInterval, delay: 0, options: [notification.animationOptions, .allowAnimatedContent, .beginFromCurrentState], animations: animations, completion: nil)
     }
     
